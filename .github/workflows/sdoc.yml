@@ -1,4 +1,4 @@
-name: CTA Pipeline
+name: CTA 
 
 on:
   push:
