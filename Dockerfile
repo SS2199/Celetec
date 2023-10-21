@@ -5,7 +5,7 @@ FROM node:16
 WORKDIR  usr/local/app
 
 # Copy package.json and package-lock.json to the container
- COPY usr/local/app
+ COPY package.json package-lock.json ./
 
 # Install Angular CLI globally
  # RUN npm install -g @angular/cli
