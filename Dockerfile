@@ -2,20 +2,21 @@
 FROM node:16
 
 # Create the application directory
-WORKDIR  usr/src/app
+WORKDIR  usr/local/app
 
 # Copy package.json and package-lock.json to the container
- COPY usr/src/app
+ COPY usr/local/app
 
 # Install Angular CLI globally
-# RUN npm install -g @angular/cli
+ # RUN npm install -g @angular/cli
 
 # # Install project dependencies
-# RUN npm install
+ RUN npm install
+ RUN npm run build
 
 # Copy the entire project's source code to the container
 FROM nginx:latest
-COPY  --from=build/usr/src/app/dist/celestradepro/usr/share/nginx/html
+COPY  --from=build/usr/local/app/dist/celestradepro/usr/share/nginx/html
  .
 
 # Expose the default Angular development server port (4200)
