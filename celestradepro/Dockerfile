@@ -4,25 +4,22 @@ FROM node:16 as build
 WORKDIR /app
 
 # Copy the package.json and package-lock.json from the Angular app directory to the container
-COPY ./celestradepro/package*.json ./
+COPY ..
 
 # Install dependencies
 RUN npm install
 
 # Copy the entire Angular app source code from the Angular app directory to the container
-COPY ./celestradepro .
-
-# Build the Angular app
-RUN npm run build
-
-# Use NGINX as the base image for the final stage
 FROM nginx:alpine
 
+# Build the Angular app
+WORKDIR /usr/share/nginx/html
+RUN rm-rt./*
+
+# Use NGINX as the base image for the final stage
+
+
 # Copy the built Angular app from the build stage to the nginx web server's directory
-COPY --from=build /app/dist/celestradepro /usr/share/nginx/html
+COPY --from=builder /app/dist/celestradepro".
+ENTRYPOINT ["nginx","-g","daemon off;"]
 
-# Expose the default HTTP port
-EXPOSE 4200
-
-# Start the nginx web server
-CMD ["nginx", "-g", "daemon off;"]
