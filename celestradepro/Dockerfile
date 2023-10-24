@@ -1,4 +1,5 @@
-FROM node:16 as build
+# Stage 1: Build the Angular app
+FROM node:16 as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -10,16 +11,22 @@ COPY ./package*.json ./
 RUN npm install
 
 # Copy the entire Angular app source code from the Angular app directory to the container
-FROM nginx:alpine
+COPY . .
 
 # Build the Angular app
-WORKDIR /usr/share/nginx/html
-RUN rm-rt./*
+RUN npm run build
+
+# Stage 2: Create a lightweight Nginx image and copy the built Angular app
+FROM nginx:alpine
+
+# Copy the built Angular app from the build stage to the nginx web server's directory
+COPY --from=builder /app/dist/celestradepro /usr/share/nginx/html
 
 # Use NGINX as the base image for the final stage
 
+# Configure Nginx
+RUN rm -rf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
 
-# Copy the built Angular app from the build stage to the nginx web server's directory
-COPY --from=builder /app/dist/celestradepro".
-ENTRYPOINT ["nginx","-g","daemon off;"]
-
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
