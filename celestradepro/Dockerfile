@@ -14,7 +14,7 @@ COPY ./package*.json ./
 COPY . .
 
 # Build the Angular app
-RUN npm run build
+
 
 # Stage 2: Create a lightweight Nginx image and copy the built Angular app
 FROM nginx:alpine
