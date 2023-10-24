@@ -4,7 +4,7 @@ FROM node:16 as build
 WORKDIR /app
 
 # Copy the package.json and package-lock.json from the Angular app directory to the container
-COPY package.json
+COPY ./celestradepro/package*.json ./
 
 # Install dependencies
 RUN npm install
