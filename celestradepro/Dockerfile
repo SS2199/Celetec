@@ -20,6 +20,6 @@ RUN rm-rt./*
 
 
 # Copy the built Angular app from the build stage to the nginx web server's directory
-COPY --from=builder /app/dist/app".
+COPY --from=builder /app/dist/celestradepro".
 ENTRYPOINT ["nginx","-g","daemon off;"]
 
