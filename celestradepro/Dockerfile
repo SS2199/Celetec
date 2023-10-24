@@ -25,8 +25,8 @@ COPY --from=builder /app/dist/celestradepro /usr/share/nginx/html
 # Use NGINX as the base image for the final stage
 
 # Configure Nginx
-RUN rm -rf /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+# RUN rm -rf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
