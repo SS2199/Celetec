@@ -19,14 +19,14 @@ COPY . .
 # Stage 2: Create a lightweight Nginx image and copy the built Angular app
 FROM nginx:alpine
 
-# Copy the built Angular app from the build stage to the nginx web server's directory
-COPY --from=builder /app/dist/celestradepro /usr/share/nginx/html
+# Set the working directory for the Nginx stage
+WORKDIR /usr/share/nginx/html
 
-# Use NGINX as the base image for the final stage
+# Copy the built Angular app from the builder stage to the nginx web server's directory
+COPY --from=builder /app/dist/celestradepro .
 
-# Configure Nginx
-# RUN rm -rf /etc/nginx/conf.d/default.conf
-# COPY nginx.conf /etc/nginx/conf.d
+# Remove the default Nginx configuration file
+
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
