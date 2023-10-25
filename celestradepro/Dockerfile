@@ -7,6 +7,11 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Install project dependencies
+RUN npm install
 
 # Copy the entire project's source code to the container
 COPY . .
@@ -15,4 +20,4 @@ COPY . .
 EXPOSE 4200
 
 # Start the Angular development server
-CMD ["npm", "start", "--host", "0.0.0.0"]
+CMD ["ng", "serve",]
