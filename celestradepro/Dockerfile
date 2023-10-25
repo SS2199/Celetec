@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install -g @angular/cli
 
 # Install project dependencies
-RUN npm install
+RUN npm install --force
 
 # Copy the entire project's source code to the container
 COPY . .
