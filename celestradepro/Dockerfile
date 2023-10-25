@@ -1,32 +1,18 @@
-# Stage 1: Build the Angular app
-FROM node:16 as builder
+# Use an official Node.js runtime as the base image
+FROM node:16
 
-# Set the working directory in the container
+# Create the application directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json from the Angular app directory to the container
-COPY ./package*.json ./
-
-# Install dependencies
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
 
 
-# Copy the entire Angular app source code from the Angular app directory to the container
+# Copy the entire project's source code to the container
 COPY . .
 
-# Build the Angular app
+# Expose the default Angular development server port (4200)
+EXPOSE 4200
 
-
-# Stage 2: Create a lightweight Nginx image and copy the built Angular app
-FROM nginx:alpine
-
-# Set the working directory for the Nginx stage
-WORKDIR /app
-
-# Copy the built Angular app from the builder stage to the nginx web server's directory
-COPY --from=builder /app/dist/app
-
-# Remove the default Nginx configuration file
-
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Angular development server
+CMD ["npm", "start", "--host", "0.0.0.0"]
