@@ -23,7 +23,7 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 # Copy the built Angular app from the builder stage to the nginx web server's directory
-
+COPY --from=build /app/dist/celestradepro /usr/share/nginx/html
 
 # Remove the default Nginx configuration file
 
