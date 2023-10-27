@@ -16,7 +16,7 @@ RUN npm install --force
 # Copy the entire project's source code to the container
 COPY . .
 FROM nginx:alpine
-WORKDIR /usr/src/app
+WORKDIR /app
 RUN rm -rf /usr/share/nginx/html/*
 
 
