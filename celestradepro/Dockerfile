@@ -15,9 +15,10 @@ RUN npm install --force
 
 # Copy the entire project's source code to the container
 COPY . .
-FROM nginx:alpine
-COPY --from=my-angular-build:latest /app/dist/celestradepro/ /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
 
+# Copy your Angular application's build output to the HTML directory
+COPY --from=build /usr/local/app/dist/celestradepro /usr/share/nginx/html
 
 
 # Expose the default Angular development server port (4200)
