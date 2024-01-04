@@ -13,10 +13,10 @@ RUN npm install -g @angular/cli
 RUN npm install --force
 
 # Copy the entire project's source code to the container
-COPY . .
-FROM nginx:alpine
-# COPY --from=build /app/dist/celestradepro/ /usr/share/nginx/html
-COPY --from=my-angular-build:latest /app/dist/celestradepro/ /usr/share/nginx/html
+# COPY . .
+# FROM nginx:alpine
+# # COPY --from=build /app/dist/celestradepro/ /usr/share/nginx/html
+# COPY --from=my-angular-build:latest /app/dist/celestradepro/ /usr/share/nginx/html
 
 
 
