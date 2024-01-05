@@ -16,8 +16,7 @@ RUN npm install -g ionic
 # Copy the rest of the application code to the working directory
 COPY ./celestradepro .
 
-# Build the Ionic app
-RUN ionic build
+
 
 # Expose the port that the app will run on (if necessary)
 EXPOSE 4200
