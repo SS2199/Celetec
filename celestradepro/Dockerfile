@@ -1,24 +1,26 @@
-FROM node:14
+# Use an official Node.js runtime as the base image for the build stage
+FROM node:16 as build
 
-# Create the application directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy the package.json and package-lock.json from the Angular app directory to the container
+COPY ./celestradepro/package*.json ./
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
+# Install app dependencies
+RUN npm install
 
-# Install project dependencies
-RUN npm install --force
+# Install the Ionic CLI globally
+RUN npm install -g ionic
 
-# Copy the entire project's source code to the container
-# COPY . .
-# FROM nginx:alpine
-# # COPY --from=build /app/dist/celestradepro/ /usr/share/nginx/html
-# COPY --from=my-angular-build:latest /app/dist/celestradepro/ /usr/share/nginx/html
+# Copy the rest of the application code to the working directory
+COPY ./celestradepro .
 
+# Build the Ionic app
+RUN ionic build
 
-
-# Expose the default Angular development server port (4200)
+# Expose the port that the app will run on (if necessary)
 EXPOSE 4200
+
+# Use the CMD instruction to specify the command to run when starting the container
+CMD ["ionic", "serve", "--host=0.0.0.0", "--disable-host-check"]
