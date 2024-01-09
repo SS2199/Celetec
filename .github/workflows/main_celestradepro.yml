@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          cd Celetec  # Change directory to the location of your package.json file
+          cd D:\Celetec\celestradepro> 
           npm install
           npm run build --if-present
           npm run test --if-present
